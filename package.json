@@ -1,0 +1,27 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@flaticon/flaticon-uicons": "^3.3.1",
+    "@lucide/astro": "^0.509.0",
+    "@tailwindcss/cli": "^4.1.6",
+    "@tailwindcss/vite": "^4.1.6",
+    "astro": "^5.7.12",
+    "lucide-astro": "^0.379.0",
+    "lucide-react": "^0.509.0",
+    "simple-icon": "^1.0.1",
+    "simple-icons": "^14.12.3",
+    "tailwindcss": "^4.1.6"
+  },
+  "devDependencies": {
+    "astro-icon": "^1.1.5",
+    "sass-embedded": "^1.87.0"
+  }
+}
