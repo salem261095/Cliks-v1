@@ -19,7 +19,7 @@
     --color-whatsapp: oklch(0.7806 0.203 142.49);
 }
 
-@import "@flaticon/flaticon-uicons/css/Regular/Rounded";
+@import '@flaticon/flaticon-uicons/css/regular/rounded.css';
 @import "@flaticon/flaticon-uicons/css/brands/all";
 
 @font-face {
