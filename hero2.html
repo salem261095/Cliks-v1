@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minimal Modern Hero Section</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            /* Tailwind gray-600 */
+            border-radius: 3px;
+        }
+
+        /* Subtle shadow for CTA on hover */
+        .cta-hover:hover {
+            background-color: #2563EB;
+            /* Tailwind blue-600 */
+            box-shadow: 0 10px 15px -3px rgb(37 99 235 / 0.4), 0 4px 6px -2px rgb(37 99 235 / 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar transition and visibility */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+
+        #sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Overlay background */
+        #overlay {
+            background: rgba(0, 0, 0, 0.6);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Improved menu button styling */
+        #menuBtn {
+            background: rgba(255 255 255 / 0.1);
+            border-radius: 0.375rem;
+            /* rounded-md */
+            padding: 0.4rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.18rem;
+        }
+
+        #menuBtn:hover,
+        #menuBtn:focus {
+            background: rgba(255 255 255 / 0.25);
+            outline: none;
+        }
+
+        #menuBtn span {
+            display: block;
+            width: 1.75rem;
+            height: 0.15rem;
+            background: white;
+            border-radius: 9999px;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen bg-gray-900 text-white">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-30 bg-transparent flex justify-center items-center h-16 px-4 md:px-8">
+        <div class="max-w-7xl w-full flex justify-between items-center relative">
+
+            <!-- Left spacer for symmetrical alignment on desktop -->
+            <div class="w-12"></div>
+
+            <!-- Logo center -->
+            <div class="flex-grow flex justify-center">
+                <a href="#" aria-label="Home" class="text-2xl font-extrabold tracking-tight select-none drop-shadow-lg">
+                    MyLogo
+                </a>
+            </div>
+
+            <!-- Menu Icon Right (visible on all screen sizes) -->
+            <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="focus:outline-none"
+                title="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- Sidebar menu -->
+    <div id="sidebar" class="fixed top-0 right-0 w-64 md:w-72 h-full bg-gray-800 shadow-xl z-50 overflow-y-auto"
+        aria-hidden="true" tabindex="-1">
+        <nav class="mt-20 flex flex-col space-y-6 px-6">
+            <a href="#" class="text-lg font-semibold hover:text-blue-400 transition">Home</a>
+            <a href="#" class="text-lg font-semibold hover:text-blue-400 transition">About</a>
+            <a href="#" class="text-lg font-semibold hover:text-blue-400 transition">Services</a>
+            <a href="#" class="text-lg font-semibold hover:text-blue-400 transition">Portfolio</a>
+            <a href="#" class="text-lg font-semibold hover:text-blue-400 transition">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Overlay for sidebar -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-60 hidden z-40"></div>
+
+    <!-- Hero Section -->
+    <section
+        class="relative flex flex-col justify-center items-center text-center px-4 py-36 sm:py-48 md:py-56 min-h-screen bg-cover bg-center"
+        style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80');">
+        <div class="bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+                Welcome to Your Modern Website
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 drop-shadow-md">
+                Experience sleek design and seamless interaction
+            </p>
+            <button
+                class="cta-hover bg-blue-500 text-white font-semibold py-3 px-8 rounded-full shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50 transition">
+                Get Started
+            </button>
+        </div>
+    </section>
+
+    <script>
+        // Toggle sidebar and overlay
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function openMenu() {
+            sidebar.classList.add('open');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('block');
+            sidebar.setAttribute('aria-hidden', 'false');
+            menuBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeMenu() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('block');
+            overlay.classList.add('hidden');
+            sidebar.setAttribute('aria-hidden', 'true');
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        menuBtn.addEventListener('click', () => {
+            if (sidebar.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        overlay.addEventListener('click', closeMenu);
+
+        // Close sidebar with escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                closeMenu();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

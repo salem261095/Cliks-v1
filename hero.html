@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Hero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .cta-hover-effect {
+            position: relative;
+            overflow: hidden;
+            z-index: 1
+        }
+
+        .cta-hover-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            z-index: -1
+        }
+
+        .cta-hover-effect:hover::before {
+            left: 0
+        }
+
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%)
+        }
+
+        .sidebar-open {
+            transform: translateX(0)
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40
+        }
+
+        .overlay-active {
+            display: block
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <div id="overlay" class="overlay"></div>
+    <header class="fixed w-full z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="w-8"></div>
+            <div class="text-white text-2xl font-bold">LOGO</div>
+            <button id="menuBtn" class="text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </header>
+    <div id="sidebar" class="sidebar fixed inset-y-0 right-0 w-64 bg-white shadow-lg z-50 p-6">
+        <button id="closeBtn" class="absolute top-4 right-4 text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <nav class="mt-16">
+            <ul class="space-y-6">
+                <li><a href="#" class="text-gray-800 hover:text-blue-600 text-xl font-medium">Home</a></li>
+                <li><a href="#" class="text-gray-800 hover:text-blue-600 text-xl font-medium">About</a></li>
+                <li><a href="#" class="text-gray-800 hover:text-blue-600 text-xl font-medium">Services</a></li>
+                <li><a href="#" class="text-gray-800 hover:text-blue-600 text-xl font-medium">Portfolio</a></li>
+                <li><a href="#" class="text-gray-800 hover:text-blue-600 text-xl font-medium">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <section class="relative h-screen w-full flex items-center justify-center bg-gray-900 overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                alt="Background" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-blue-900 opacity-50"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">Build Modern Websites With Ease
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto">Create beautiful, responsive websites
+                faster than ever with our cutting-edge tools and frameworks.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#"
+                    class="cta-hover-effect bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full text-lg transition duration-300">Get
+                    Started</a>
+                <a href="#"
+                    class="cta-hover-effect bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-full text-lg transition duration-300">Learn
+                    More</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        const menuBtn = document.getElementById('menuBtn'), closeBtn = document.getElementById('closeBtn'), sidebar = document.getElementById('sidebar'), overlay = document.getElementById('overlay');
+        menuBtn.addEventListener('click', () => { sidebar.classList.add('sidebar-open'); overlay.classList.add('overlay-active'); document.body.style.overflow = 'hidden' });
+        closeBtn.addEventListener('click', () => { sidebar.classList.remove('sidebar-open'); overlay.classList.remove('overlay-active'); document.body.style.overflow = '' });
+        overlay.addEventListener('click', () => { sidebar.classList.remove('sidebar-open'); overlay.classList.remove('overlay-active'); document.body.style.overflow = '' });
+    </script>
+</body>
+
+</html>
